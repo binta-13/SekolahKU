@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: API Course Management
+  version: 1.0.0
+  description: API untuk mengelola users, courses, dan userCourse.
+paths:
+  /users:
+    get:
+      summary: Get all users
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: User created successfully
+  /users/{id}:
+    put:
+      summary: Update a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: User updated successfully
+    delete:
+      summary: Delete a user
+      responses:
+        200:
+          description: User deleted successfully
+
+  /courses:
+    get:
+      summary: Get all courses
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+    post:
+      summary: Create a new course
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        201:
+          description: Course created successfully
+  /courses/{id}:
+    put:
+      summary: Update a course
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        200:
+          description: Course updated successfully
+    delete:
+      summary: Delete a course
+      responses:
+        200:
+          description: Course deleted successfully
+
+  /userCourses:
+    get:
+      summary: Get all user-courses
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCourse'
+    post:
+      summary: Create a new user-course relation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCourse'
+      responses:
+        201:
+          description: User-Course relation created successfully
+  /userCourses/{id}:
+    put:
+      summary: Update a user-course relation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCourse'
+      responses:
+        200:
+          description: User-Course updated successfully
+    delete:
+      summary: Delete a user-course relation
+      responses:
+        200:
+          description: User-Course relation deleted successfully
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum: [admin, user]
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        mentor_name:
+          type: string
+        mentor_degree:
+          type: string
+        fee:
+          type: number
+    UserCourse:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        course_id:
+          type: integer
